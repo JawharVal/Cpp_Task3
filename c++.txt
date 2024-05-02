@@ -1,0 +1,80 @@
+#include <iostream>
+#include <deque>
+#include <string>
+
+template <typename T>
+class MyDeque {
+private:
+    std::deque<T> dq;
+public:
+    void push_back(T item) {
+        dq.push_back(item);
+    }
+    void push_front(T item) {
+        dq.push_front(item);
+    }
+    void pop_back() {
+        if (!dq.empty()) {
+            dq.pop_back();
+        }
+        else {
+            std::cout << "Deque is empty.\n";
+        }
+    }
+    void pop_front() {
+        if (!dq.empty()) {
+            dq.pop_front();
+        }
+        else {
+            std::cout << "Deque is empty.\n";
+        }
+    }
+    void display() {
+        if (!dq.empty()) {
+            std::cout << "Deque: ";
+            for (const auto& item : dq) {
+                std::cout << item << " ";
+            }
+            std::cout << "\n";
+        }
+        else {
+            std::cout << "Deque is empty.\n";
+        }
+    }
+};
+
+int main() {
+    MyDeque<std::string> dq;
+    int command;
+    std::string item;
+
+    while (true) {
+        dq.display();
+        std::cout << "Enter command (1: push_back, 2: push_front, 3: pop_back, 4: pop_front, 5: quit): ";
+        std::cin >> command;
+        if (command == 1 || command == 2) {
+            std::cout << "Enter item: ";
+            std::cin >> item;
+            if (command == 1) {
+                dq.push_back(item);
+            }
+            else {
+                dq.push_front(item);
+            }
+        }
+        else if (command == 3) {
+            dq.pop_back();
+        }
+        else if (command == 4) {
+            dq.pop_front();
+        }
+        else if (command == 5) {
+            break;
+        }
+        else {
+            std::cout << "Invalid command.\n";
+        }
+    }
+
+    return 0;
+}
